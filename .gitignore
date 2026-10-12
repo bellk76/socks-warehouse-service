@@ -1,0 +1,18 @@
+# Сборка
+target/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# ОС
+.DS_Store
+Thumbs.db
+
+# Логи
+*.log
+
+# Служебные файлы
+opencode.json
+AGENTS.md

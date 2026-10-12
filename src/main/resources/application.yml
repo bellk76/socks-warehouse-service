@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: socks-warehouse-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/socks_db}
+    username: ${DB_USER:socks}
+    password: ${DB_PASSWORD:socks}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  flyway:
+    enabled: true
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
