@@ -101,6 +101,19 @@ GET /api/socks?color=yellow&operation=equal&cottonPart=50
 
 Сокет Podman пробрасывается на `npipe:////./pipe/docker_engine`, Testcontainers находит его автоматически.
 
+## Деплой на Render
+
+Проект содержит `render.yaml` (Blueprint) — разворачивает web-сервис (Docker) и PostgreSQL одной кнопкой.
+
+1. Создайте аккаунт на [render.com](https://render.com) (нужна только почта, карта не требуется).
+2. Подключите GitHub-аккаунт: `Dashboard` → `New` → `Blueprint` → выберите репозиторий.
+3. Render найдёт `render.yaml` и создаст два сервиса: `socks-warehouse-service` (web) и `socks-db` (PostgreSQL). Переменные БД (`DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`) подставятся автоматически.
+4. После деплоя приложение будет доступно по адресу вида `https://socks-warehouse-service.onrender.com`.
+
+Проверка: `GET https://<адрес>/actuator/health` → `{"status":"UP"}`.
+
+Порт приложение берёт из переменной `PORT`, которую Render задаёт автоматически (`server.port: ${PORT:8080}`).
+
 ## Схема БД
 
 Миграции Flyway: `src/main/resources/db/migration/`.
