@@ -103,16 +103,22 @@ GET /api/socks?color=yellow&operation=equal&cottonPart=50
 
 ## Деплой на Render
 
-Проект содержит `render.yaml` (Blueprint) — разворачивает web-сервис (Docker) и PostgreSQL одной кнопкой.
+Проект **полностью готов к деплою на Render**, но ещё не развёрнут. В репозитории лежит `render.yaml` (Blueprint), который разворачивает web-сервис (Docker) и PostgreSQL одной кнопкой.
 
-1. Создайте аккаунт на [render.com](https://render.com) (нужна только почта, карта не требуется).
-2. Подключите GitHub-аккаунт: `Dashboard` → `New` → `Blueprint` → выберите репозиторий.
+### Что осталось сделать
+
+1. Создать аккаунт на [render.com](https://render.com) (нужна только почта, карта не требуется).
+2. Подключить GitHub-аккаунт: `Dashboard` → `New` → `Blueprint` → выбрать репозиторий.
 3. Render найдёт `render.yaml` и создаст два сервиса: `socks-warehouse-service` (web) и `socks-db` (PostgreSQL). Переменные БД (`DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`) подставятся автоматически.
 4. После деплоя приложение будет доступно по адресу вида `https://socks-warehouse-service.onrender.com`.
 
 Проверка: `GET https://<адрес>/actuator/health` → `{"status":"UP"}`.
 
-Порт приложение берёт из переменной `PORT`, которую Render задаёт автоматически (`server.port: ${PORT:8080}`).
+### Что уже подготовлено
+
+- `render.yaml` — Blueprint для Render (web-сервис на Docker + PostgreSQL).
+- Порт приложение берёт из переменной `PORT`, которую Render задаёт автоматически (`server.port: ${PORT:8080}`).
+- URL БД собирается из переменных `DB_HOST`/`DB_PORT`/`DB_NAME` (или из готовой `DB_URL`), которые Render прокидывает из базы.
 
 ## Схема БД
 
