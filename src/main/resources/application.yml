@@ -2,7 +2,7 @@ spring:
   application:
     name: socks-warehouse-service
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/socks_db}
+    url: ${DB_URL:jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:socks_db}}
     username: ${DB_USER:socks}
     password: ${DB_PASSWORD:socks}
   jpa:
@@ -13,7 +13,7 @@ spring:
     enabled: true
 
 server:
-  port: 8080
+  port: ${PORT:8080}
 
 management:
   endpoints:
